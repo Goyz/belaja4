@@ -1,0 +1,15 @@
+<div id="main_navigation" class="blue"> <!-- Main navigation start -->
+        <div class="inner_navigation">
+            <ul class="main">
+			{foreach from=$menu item=i}
+                <li ><a class="expand" id="current" href="#"><i class="icon-home"></i> {$i.parent}</a>
+                    <ul class="sub_main">
+						{foreach from=$i.child item=x}
+                        <li><a href="javascript:void(0);" onClick="loadUrl('{$host}{$x.url}');$('#judul_na').html('{$x.menu}');$('#desc_na').html('{$x.deskripsi}');">{$x.menu}</a></li>
+                        {/foreach}
+                    </ul>
+                </li>
+             {/foreach}
+            </ul>
+        </div>
+    </div>  

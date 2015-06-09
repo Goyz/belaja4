@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>E-Learning KSO</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <!-- Le styles -->
+    <link href="__assets/css/bootstrap/bootstrap.css" rel="stylesheet">
+    <link href="__assets/css/bootstrap/bootstrap-responsive.css" rel="stylesheet">
+    <link href="__assets/css/bootstrap/stylesheet.css" rel="stylesheet">
+    <link href="__assets/icon/font-awesome.css" rel="stylesheet">
+    <!--link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800' rel='stylesheet' type='text/css'-->
+
+    <!-- Le fav and touch icons -->
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="img/apple-touch-icon-144-precomposed.html">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="img/apple-touch-icon-114-precomposed.html">
+      <link rel="apple-touch-icon-precomposed" sizes="72x72" href="img/apple-touch-icon-72-precomposed.html">
+                    <link rel="apple-touch-icon-precomposed" href="img/apple-touch-icon-57-precomposed.html">
+                                   <link rel="shortcut icon" href="img/favicon.png">
+
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="__assets/js/html5shiv.js"></script>
+    <![endif]-->
+  </head>
+
+  <body>
+
+    <div class="login-container">
+        <div class="login-header">
+            <h4>Sign in</h4>
+        </div>
+        <form name='frmLogin' action="{$host}login" method="post">
+            <div class="login-field">
+                <label for="username">Username</label>
+                <input type="text" name="user" id="user" placeholder="Username">
+                <i class="icon-user"></i>
+            </div>
+            <div class="login-field">
+                <label for="password">Password</label>
+                <input type="password" name="pwd" id="pwd" placeholder="Password">
+                <i class="icon-lock"></i>
+            </div>
+            <div class="login-button">
+                <button type="submit" class="btn btn-large btn-block blue">SIGN IN <i class="icon-arrow-right"></i></button>
+            </div>
+            <div class="forgot-password">
+                <a href="#">Forgot password?</a>
+				{if isset($error)}
+					<div style="text-align:center;margin-top:30px">
+						<span style="color:red;"><b><i>{$error}</i></b></span>
+					</div>
+				{/if}	
+            </div>
+        </form>
+    </div>
+
+    <!-- Le javascript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="__assets/js/jquery.min.js"></script>
+    <script src="__assets/js/jquery-ui-1.10.3.js"></script>
+    <script src="__assets/js/bootstrap.js"></script>
+
+    <script src="__assets/js/library/jquery.collapsible.min.js"></script>
+    <script src="__assets/js/library/jquery.mCustomScrollbar.min.js"></script>
+    <script src="__assets/js/library/jquery.mousewheel.min.js"></script>
+    <script src="__assets/js/library/jquery.uniform.min.js"></script>
+
+    <!--script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyCL6XtCGot7S7cfxnO6tRfeZx9kLQQRMtA&amp;sensor=false"></script-->
+    <script src="__assets/js/library/jquery.sparkline.min.js"></script>
+    <script src="__assets/js/library/chosen.jquery.min.js"></script>
+    <script src="__assets/js/library/jquery.easytabs.js"></script>
+    <script src="__assets/js/library/flot/excanvas.min.js"></script>
+    <script src="__assets/js/library/flot/jquery.flot.js"></script>
+    <script src="__assets/js/library/flot/jquery.flot.pie.js"></script>
+    <script src="__assets/js/library/flot/jquery.flot.selection.js"></script>
+    <script src="__assets/js/library/flot/jquery.flot.resize.js"></script>
+    <script src="__assets/js/library/flot/jquery.flot.orderBars.js"></script>
+    <script src="__assets/js/library/maps/jquery.vmap.js"></script>
+    <script src="__assets/js/library/maps/maps/jquery.vmap.world.js"></script>
+    <script src="__assets/js/library/maps/data/jquery.vmap.sampledata.js"></script>
+    <script src="__assets/js/library/jquery.autosize-min.js"></script>
+    <script src="__assets/js/library/charCount.js"></script>
+    <script src="__assets/js/library/jquery.minicolors.js"></script>
+    <script src="__assets/js/library/jquery.tagsinput.js"></script>
+    <script src="__assets/js/library/fullcalendar.min.js"></script>
+    <script src="__assets/js/library/footable/footable.js"></script>
+    <script src="__assets/js/library/footable/data-generator.js"></script>
+
+    <script src="__assets/js/library/bootstrap-datetimepicker.js"></script>
+    <script src="__assets/js/library/bootstrap-timepicker.js"></script>
+    <script src="__assets/js/library/bootstrap-datepicker.js"></script>
+    <script src="__assets/js/library/bootstrap-fileupload.js"></script>
+    <script src="__assets/js/library/jquery.inputmask.bundle.js"></script>
+
+    <script src="__assets/js/library/jquery.backstretch.min.js"></script>
+
+    <script src="__assets/js/flatpoint_core.js"></script>
+
+    <script>
+        jQuery.backstretch([
+                "__assets/images/bg/slide_01.jpg", 
+                "__assets/images/bg/slide_02.jpg",
+                "__assets/images/bg/slide_03.jpg",
+                "__assets/images/bg/slide_04.jpg"
+            ],{
+                duration: 5000, fade: 1000
+        });
+		
+		
+		
+		
+    </script>
+
+  </body>
+</html>

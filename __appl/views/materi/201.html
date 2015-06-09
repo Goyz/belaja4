@@ -1,0 +1,26 @@
+<div id="grid_na_{$main}">
+	<div id="tb_{$main}">
+		<div style="margin-top:2px;margin-left:10px; width:100%; font-family:Arial, Helvetica, sans-serif;">
+			<a href="javascript:void(0)" class="l-btn l-btn-plain " group="" id="find_{$main}" onClick="" >
+				<span class="l-btn-left l-btn-icon-left">
+					<span class="l-btn-text">Tambah Materi</span><span class="l-btn-icon icon-add"></span>
+				</span>
+			</a>&nbsp;
+			<a href="javascript:void(0)" class="l-btn l-btn-plain " group="" id="find_{$main}" onClick="" >
+				<span class="l-btn-left l-btn-icon-left">
+					<span class="l-btn-text">Edit Materi</span><span class="l-btn-icon icon-edit"></span>
+				</span>
+			</a>&nbsp;
+			<a href="javascript:void(0)" class="l-btn l-btn-plain " group="" id="find_{$main}" onClick="" >
+				<span class="l-btn-left l-btn-icon-left">
+					<span class="l-btn-text">Hapus Materi</span><span class="l-btn-icon icon-remove"></span>
+				</span>
+			</a>&nbsp;
+		</div>
+	</div>
+	<div id="grid_{$main}"></div>
+</div>
+<script>
+$('#grid_na_{$main}').css('height',(getClientHeight()-180));
+genGrid('{$main}', 'grid_{$main}');
+</script>

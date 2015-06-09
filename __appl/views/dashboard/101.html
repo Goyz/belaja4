@@ -1,0 +1,29 @@
+<div id="grid_na">
+	<div id="grid_{$main}"></div>
+</div>
+<script>
+$('#grid_na').css('height',(getClientHeight()-180));
+var grid_act=$("#grid_{$main}").datagrid({
+		title:'List Activity',
+        //height:tingginya,
+        width:500,
+		height:300,
+		rownumbers:false,
+		iconCls:'database',
+        fit:true,
+        striped:true,
+        pagination:true,
+        remoteSort: false,
+       // url: host+"home/getdata/tbl_acm_wizard/config",		
+		nowrap: true,
+        singleSelect:false,
+		pageSize:50,
+		pageList:[50,100,150,200],
+		columns:[
+           [	
+				{ field:'activity_code',title:'Activity',width:120, halign:'center',align:'left' },
+				{ field:'descript',title:'Description',width:300, halign:'center',align:'left' }
+			]
+        ],
+	});
+</script>
