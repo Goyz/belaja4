@@ -24,12 +24,12 @@ class Login extends KSO_Controller {
 								return header("Location: {$this->host}");
 							}
 							else{
-								$this->db->query("UPDATE tbl_user set is_login=0 where id='".$cek_user['id']."'");
+								$this->db->query("UPDATE tbl_user set is_login=0 where nama_user='".$cek_user['nama_user']."'");
 							}
 						}
 						
-						$this->db->query("UPDATE tbl_user set is_login=1,last_login=".time().",last_activity=".time()." where id='".$cek_user['id']."'");
-						$this->db->query("INSERT INTO tbl_user_history (tbl_user_id,login_date) values (".$cek_user['id'].",'".date('Y-m-d H:i:s')."')");
+						$this->db->query("UPDATE tbl_user set is_login=1,last_login=".time().",last_activity=".time()." where nama_user='".$cek_user['nama_user']."'");
+						$this->db->query("INSERT INTO tbl_user_history (tbl_user_id,login_date) values ('".$cek_user['nama_user']."','".date('Y-m-d H:i:s')."')");
 						$cek_user['id_his']=$this->db->insert_id();
 						unset($cek_user['password']);
 						$this->session->set_userdata($this->config->item('user_data'), base64_encode(serialize($cek_user)));
@@ -64,7 +64,7 @@ class Login extends KSO_Controller {
 		$this->session->unset_userdata($this->config->item('user_data'), 'limit');
 		//$this->session->unset_userdata($this->config->item('modeling'), 'limit');
 		$this->session->sess_destroy();
-		$this->db->query("UPDATE tbl_user set is_login=0 where id='".$this->auth['id']."'");
+		$this->db->query("UPDATE tbl_user set is_login=0 where nama_user='".$this->auth['nama_user']."'");
 		$this->db->query("UPDATE tbl_user_history set last_login='".date('Y-m-d H:i:s')."' where id='".$this->auth['id_his']."'");
 		header("Location: " . $this->host);
 	}
