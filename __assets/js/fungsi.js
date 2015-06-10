@@ -258,6 +258,17 @@ function genGrid(modnya, divnya, lebarnya, tingginya){
 				{field:'tgl_akhir',title:'Tgl. Akhir',width:120, halign:'center',align:'center'}
 			];
 		break;
+		case "301":
+			judulnya = "Data User Management";
+			urlnya = "tbl_user";
+			fitnya = true;
+			kolom[modnya] = [	
+				{field:'user_name',title:'Judul',width:150, halign:'center',align:'left'},
+				{field:'deskripsi',title:'Deskripsi',width:250, halign:'center',align:'left'},
+				{field:'tgl_mulai',title:'Tgl. Mulai',width:120, halign:'center',align:'center'},
+				{field:'tgl_akhir',title:'Tgl. Akhir',width:120, halign:'center',align:'center'}
+			];
+		break;
 		
 	}
 	

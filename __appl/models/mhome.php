@@ -11,9 +11,13 @@ class mhome extends CI_Model{
 		switch($type){
 			case "data_login":
 				$sql = "
-					SELECT *
-					FROM tbl_user
-					WHERE nama_user = '".$p1."'
+					SELECT A.nama_user,A.is_login,A.last_activity,A.last_login,A.status,A.cl_user_group_id,E.group_user,B.*,D.jabatan
+					FROM tbl_user A 
+					LEFT JOIN cl_karyawan B ON B.tbl_user_id=A.nama_user
+					LEFT JOIN tbl_karyawan_status C ON B.NIK=C.NIK
+					LEFT JOIN cl_jabatan D ON C.jabatan=D.kode 
+					LEFT JOIN cl_user_group E ON A.cl_user_group_id=E.id
+					WHERE A.nama_user= '".$p1."'
 				";
 				return $this->result_query($sql,'row_array');
 			break;
