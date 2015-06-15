@@ -1,0 +1,39 @@
+<div class="row-fluid" style='float:left;width:100%;' id="isi_{$main}">
+	<div id="tb_mst_{$main}">
+		<div style="margin-top:2px;margin-left:10px; width:100%; font-family:Arial, Helvetica, sans-serif;">
+			<a href="javascript:void(0)" class="l-btn l-btn-plain " group="" id="tambah_{$main}" onClick="" >
+				<span class="l-btn-left l-btn-icon-left">
+					<span class="l-btn-text">Tambah</span><span class="l-btn-icon icon-add"></span>
+				</span>
+			</a>&nbsp;
+			<a href="javascript:void(0)" class="l-btn l-btn-plain " group="" id="edit_{$main}" onClick="" >
+				<span class="l-btn-left l-btn-icon-left">
+					<span class="l-btn-text">Edit</span><span class="l-btn-icon icon-edit"></span>
+				</span>
+			</a>&nbsp;
+			<a href="javascript:void(0)" class="l-btn l-btn-plain " group="" id="delete_{$main}" onClick="" >
+				<span class="l-btn-left l-btn-icon-left">
+					<span class="l-btn-text">Hapus</span><span class="l-btn-icon icon-remove"></span>
+				</span>
+			</a>&nbsp;
+		</div>
+	</div>
+	<div id='grid_{$main}'></div>
+	
+</div>
+
+<script>
+$('#isi_{$main}').css('height',getClientHeight()-260);
+genGrid('mst_{$main}','grid_{$main}', 500, 160);
+$('#tambah_{$main}').bind('click',function(){
+	$('#isi_301').hide();
+	$('#detil_301').html('').addClass('loading');
+	$.post(host+'home/modul/referensi/add_user_administrator',{ cl_user_group_id:{$group_id} },function(r){
+		$('#detil_301').removeClass('loading').html(r);
+		$('#detil_301').show();
+	});
+	
+	
+});
+
+</script>

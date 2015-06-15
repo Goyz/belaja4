@@ -89,6 +89,7 @@ function windowForm(html,judul,width,height){
     $(container).window({
        title:judul,
        width:width,
+	   //fit:true,
        height:height,
        autoOpen:false,
        maximizable:false,
@@ -240,10 +241,12 @@ function genGrid(modnya, divnya, lebarnya, tingginya){
 
 	var kolom ={};
 	var frozen ={};
+	var param ={};
 	var judulnya;
 	var urlnya;
 	var urlglobal="";
 	var fitnya;
+	var nowrap_na=true;
 	var pagesizeboy = 10;
 	
 	switch(modnya){
@@ -269,7 +272,83 @@ function genGrid(modnya, divnya, lebarnya, tingginya){
 				{field:'tgl_akhir',title:'Tgl. Akhir',width:120, halign:'center',align:'center'}
 			];
 		break;
-		
+		case "305":
+			judulnya = "Data Master Karyawan";
+			urlnya = "cl_karyawan";
+			fitnya = true;
+			nowrap_na=false;
+			
+			kolom[modnya] = [	
+				{field:'tbl_user_id',title:'UserAktif',width:100, halign:'center',align:'center',
+					formatter:function(value,rowData,rowIndex){
+						if(value){
+							return '<a class="no" href="javascript:void(0)" onClick="" style="">Aktif</a>';
+						}
+						else{
+							return '<a class="yes" href="javascript:void(0)" onClick="aktif_user(\''+rowData.NIK+'\',\'edit\',\''+modnya+'\')" style="">Aktifkan</a>';
+						}
+					}
+				},
+				{field:'NIK',title:'NIK',width:100, halign:'center',align:'center'},
+				{field:'Nama',title:'Nama',width:200, halign:'center',align:'left'},
+				{field:'Alamat',title:'Alamat',width:250, halign:'center',align:'left'},
+				{field:'jabatan',title:'Jabatan',width:120, halign:'center',align:'left'},
+				{field:'NoTelepon',title:'No. Tlp',width:120, halign:'center',align:'left'},
+				{field:'Email',title:'Email',width:120, halign:'center',align:'left'}
+			];
+			
+		break;
+		case "mst_administrator":
+			judulnya = "Data User";
+			urlnya = "tbl_user";
+			param['cl_user_group_id']=1,
+			fitnya = true;
+			kolom[modnya] = [	
+				{field:'nama_user',title:'UserLogin',width:80, halign:'center',align:'left'},
+				{field:'NIK',title:'NIK',width:100, halign:'center',align:'left'},
+				{field:'Nama',title:'Nama',width:150, halign:'center',align:'left'},
+				{field:'Alamat',title:'Alamat',width:250, halign:'center',align:'left'},
+				{field:'Email',title:'Email',width:120, halign:'center',align:'left'},
+			];
+		break;
+		case "mst_administrasi":
+			judulnya = "Data User";
+			urlnya = "tbl_user";
+			param['cl_user_group_id']=4,
+			fitnya = true;
+			kolom[modnya] = [	
+				{field:'nama_user',title:'UserLogin',width:80, halign:'center',align:'left'},
+				{field:'NIK',title:'NIK',width:100, halign:'center',align:'left'},
+				{field:'Nama',title:'Nama',width:150, halign:'center',align:'left'},
+				{field:'Alamat',title:'Alamat',width:250, halign:'center',align:'left'},
+				{field:'Email',title:'Email',width:120, halign:'center',align:'left'},
+			];
+		break;
+		case "mst_instruktur":
+			judulnya = "Data User";
+			urlnya = "tbl_user";
+			param['cl_user_group_id']=2,
+			fitnya = true;
+			kolom[modnya] = [	
+				{field:'user_name',title:'Judul',width:150, halign:'center',align:'left'},
+				{field:'deskripsi',title:'Deskripsi',width:250, halign:'center',align:'left'},
+				{field:'tgl_mulai',title:'Tgl. Mulai',width:120, halign:'center',align:'center'},
+				{field:'tgl_akhir',title:'Tgl. Akhir',width:120, halign:'center',align:'center'}
+			];
+		break;
+		case "mst_peserta":
+			judulnya = "Data User";
+			urlnya = "tbl_user";
+			param['cl_user_group_id']=3,
+			fitnya = true;
+			kolom[modnya] = [	
+				{field:'nama_user',title:'UserLogin',width:80, halign:'center',align:'left'},
+				{field:'NIK',title:'NIK',width:100, halign:'center',align:'left'},
+				{field:'Nama',title:'Nama',width:150, halign:'center',align:'left'},
+				{field:'Alamat',title:'Alamat',width:250, halign:'center',align:'left'},
+				{field:'Email',title:'Email',width:120, halign:'center',align:'left'},
+			];
+		break;
 	}
 	
 	$("#"+divnya).datagrid({
@@ -279,17 +358,22 @@ function genGrid(modnya, divnya, lebarnya, tingginya){
 		rownumbers:true,
 		iconCls:'database',
         fit:fitnya,
+		queryParams:param,
         striped:true,
         pagination:true,
         remoteSort: false,
         url: (urlglobal == "" ? host+"home/getdata/"+urlnya : urlglobal),		
-		nowrap: true,
+		nowrap: nowrap_na,
         singleSelect:true,
 		pageSize:pagesizeboy,
 		pageList:[10,20,30,40,50,75,100,200],
+		frozenColumns:[
+            frozen[modnya]
+        ],
 		columns:[
             kolom[modnya]
         ],
+		
 		onLoadSuccess:function(d){
 			
 			$('.yes').linkbutton({  
@@ -318,79 +402,31 @@ function genform(type, modulnya, submodulnya, stswindow, tabel){
 	var urlpost = host+'home/modul/'+modulnya+'/form_'+submodulnya;
 	var urldelete = host+'home/simpansavedata/'+tabel;
 	switch(submodulnya){
-		case "201":
-			var lebar = getClientWidth()-990;
-			var tinggi = getClientHeight()-535;
-			var judulwindow = 'Form Data Provinsi';
-			var table="cl_provinsi";
-		break;
 		
 		//Setting
-		case "701":
+		case "305":
 			var lebar = getClientWidth()-800;
 			var tinggi = getClientHeight()-270;
 			var judulwindow = 'Form User Management';
-			var table="tbl_user";
-			urlpost = host+'homex/modul/'+modulnya+'/form_'+submodulnya;
-			urldelete = host+'homex/simpansavedata/'+tabel;
+			var table="cl_karyawan";
 		break;
-		case "702":
-			var lebar = getClientWidth()-800;
-			var tinggi = getClientHeight()-400;
-			var judulwindow = 'Form User Group';
-			var table="cl_user_group";
-			urlpost = host+'homex/modul/'+modulnya+'/form_'+submodulnya;
-			urldelete = host+'homex/simpansavedata/'+tabel;
-		break;
-		//End Setting
-		
-		//Data Reference
-		case "ref_employee":
-			var lebar = getClientWidth()-500;
-			var tinggi = getClientHeight()-200;
-			var judulwindow = 'Form Data Employee';
-			var table="tbl_emp";
-			urlpost = host+'homex/modul/'+modulnya+'/form_'+submodulnya;
-		break;
-		case "ref_expense":
-			var lebar = getClientWidth()-500;
-			var tinggi = getClientHeight()-300;
-			var judulwindow = 'Form Data Expense';
-			var table="tbl_exp";
-			urlpost = host+'homex/modul/'+modulnya+'/form_'+submodulnya;
-		break;
-		case "ref_allocation":
-			var lebar = getClientWidth()-800;
-			var tinggi = getClientHeight()-400;
-			var judulwindow = 'Form Data Allocation';
-			var table="tbl_loc";
-			urlpost = host+'homex/modul/'+modulnya+'/form_'+submodulnya;
-		break;
-		case "100":
-			var lebar = getClientWidth()-800;
-			var tinggi = getClientHeight()-380;
-			var judulwindow = 'Form Data Model';
-			var table="tbl_model";
-			urlpost = host+'home/modul/'+modulnya+'/form_'+submodulnya;
-		break;
-		//Data Reference
-		
 	}
 	
 	switch(type){
 		case "add":
 			if(stswindow == undefined){
-				$('#grid_nya_'+submodulnya).hide();
-				$('#detil_nya_'+submodulnya).show();
+				$('#grid_na_'+submodulnya).hide();
+				$('#detil_na_'+submodulnya).addClass('loading').html('');
+				$('#detil_na_'+submodulnya).show();
 			}
-			$.post(urlpost, {'editstatus':'add'}, function(resp){
+			$.post(urlpost, {'editstatus':'add','mod':submodulnya}, function(resp){
 				if(stswindow == 'windowform'){
 					windowForm(resp, judulwindow, lebar, tinggi);
 				}else if(stswindow == 'windowpanel'){
 					windowFormPanel(resp, judulwindow, lebar, tinggi);
 				}else{
-					$('#detil_nya_'+submodulnya).show();
-					$('#detil_nya_'+submodulnya).html(resp);
+					$('#detil_na_'+submodulnya).show();
+					$('#detil_na_'+submodulnya).removeClass('loading').html(resp);
 				}
 			});
 		break;
@@ -400,24 +436,25 @@ function genform(type, modulnya, submodulnya, stswindow, tabel){
 			if(row){
 				if(type=='edit'){
 					if(stswindow == undefined){
-						$('#grid_nya_'+submodulnya).hide();
-						$('#detil_nya_'+submodulnya).show();
+						$('#grid_na_'+submodulnya).hide();
+						$('#detil_na_'+submodulnya).addClass('loading').html('');
+						$('#detil_na_'+submodulnya).show();
 					}
-					$.post(urlpost, {'editstatus':'edit',id:row.id, 'tabel':table}, function(resp){
+					$.post(urlpost, {'editstatus':'edit',id:(row.id ? row.id : row.NIK),mod:submodulnya,'tabel':table}, function(resp){
 						if(stswindow == 'windowform'){
 							windowForm(resp, judulwindow, lebar, tinggi);
 						}else if(stswindow == 'windowpanel'){
 							windowFormPanel(resp, judulwindow, lebar, tinggi);
 						}else{
-							$('#detil_nya_'+submodulnya).show();
-							$('#detil_nya_'+submodulnya).html(resp);
+							$('#detil_na_'+submodulnya).show();
+							$('#detil_na_'+submodulnya).removeClass('loading').html(resp);
 						}
 					});
 				}
 				else{
 					if(confirm("Do You Want To Delete This Data ?")){
 						loadingna();
-						$.post(urldelete, {id:row.id,'editstatus':'delete'}, function(r){
+						$.post(urldelete, {id:(row.id ? row.id : row.NIK),'editstatus':'delete'}, function(r){
 							if(r==1){
 								winLoadingClose();
 								$.messager.alert('ABC System',"Row Data Was Deleted",'info');
@@ -471,8 +508,9 @@ function submit_form(frm,func){
 function genTab(div,mod,sub_mod,tab_array,div_panel,judul_panel,mod_num, height_panel, height_tab){
 	var id_sub_mod=sub_mod.split("_");
 	$(div_panel).panel({
-		width:getClientWidth()-268,
-		height:(typeof(height_panel) == "undefined" ? getClientHeight()-100 : height_panel),
+		//width:getClientWidth()-580,
+		//height:(typeof(height_panel) == "undefined" ? getClientHeight()-100 : height_panel),
+		fit:true,
 		title:judul_panel,
 		tools:[{
 				iconCls:'icon-cancel',
@@ -487,8 +525,9 @@ function genTab(div,mod,sub_mod,tab_array,div_panel,judul_panel,mod_num, height_
 	$(div).tabs({
 		title:'AA',
 		//height: getClientHeight()-190,
-		height: (typeof(height_tab) == "undefined" ? getClientHeight()-190 : height_tab),
-		width: getClientWidth()-280,
+		//height: (typeof(height_tab) == "undefined" ? getClientHeight()-190 : height_tab),
+		//width: getClientWidth()-280,
+		fit:true,
 		plain: false,
 		selected:0
 	});
@@ -508,21 +547,18 @@ function genTab(div,mod,sub_mod,tab_array,div_panel,judul_panel,mod_num, height_
 				var par={};
 				$('#'+isi_tab.toLowerCase()).html('').addClass('loading');
 				urlnya = host+'home/modul/'+mod+'/'+isi_tab.toLowerCase();
-				switch(mod){
-					case "activity_master":
-						par['par_1']=$('#par_1').val();
-						par['par_2']=$('#par_2').val();
-						par['par_3']=$('#par_3').val();
+				switch(isi_tab.toLowerCase()){
+					case "administrator":
+						par['cl_user_group_id']=1
 					break;
-					case "model":
-						par['par_1']=$('#id_activity').val();
+					case "instruktur":
+						par['cl_user_group_id']=2
 					break;
-					case "process_master":
-						par['par_1']=$('#par_1').val();
-						par['par_2']=$('#par_2').val();
+					case "peserta":
+						par['cl_user_group_id']=3
 					break;
-					case "reference":
-						urlnya = host+'homex/modul/'+mod+'/'+isi_tab.toLowerCase();
+					case "administrasi":
+						par['cl_user_group_id']=4
 					break;
 					//default:urlnya = host+'home/modul/'+mod+'/'+isi_tab.toLowerCase();
 				}
@@ -689,18 +725,13 @@ function transfer_data(from,to,grid_id_from,grid_id_to){
 		}
 	
 }
-function aktif_non(id,sts){
-	loadingna();
-		$.post(host+'home/set_model',{id:id,status:sts},function(r){
-			var resp=JSON.parse(r);
-			//if(r==1){
-					$("#grid_100").datagrid('reload');
-					//console.log(resp.id);
-					$('#model_na').html(resp.nama_model.toUpperCase());
-					winLoadingClose();
-			//}
-			//else{
-				//alert(r);winLoadingClose();	
-			//}
+function aktif_user(id,sts,mod){
+	//loadingna();
+		$('#grid_na_'+mod).hide();
+		$('#detil_na_'+mod).addClass('loading').html('');
+		$('#detil_na_'+mod).show();
+		$.post(host+'home/modul/referensi/form_'+mod,{id:id,editstatus:sts,mod:mod},function(r){
+			//var resp=JSON.parse(r);
+			$('#detil_na_'+mod).removeClass('loading').html(r);
 		});
 }

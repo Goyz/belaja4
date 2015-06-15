@@ -43,7 +43,7 @@
   });
 
   /** Popovers **/
-  $('a[rel="popover"]').popover();
+ // $('a[rel="popover"]').popover();
   
   $('a[rel="popover"]').click(function() {
     return false;
@@ -246,7 +246,7 @@
   });
 
   //* Draggable boxes UI *//
-  $("#sortable_boxes").sortable({
+ /* $("#sortable_boxes").sortable({
     connectWith: ".well",
     items: ".well",
     opacity: 0.8,
@@ -255,8 +255,8 @@
     forcePlaceholderSize: true,
     tolerance: "pointer"
   });
-
-  $(".column").disableSelection();
+*/
+  //$(".column").disableSelection();
 
   //* Collapsible wells
   $('li.collapse_well a').click(function() {

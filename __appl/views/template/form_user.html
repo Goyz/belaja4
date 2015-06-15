@@ -1,0 +1,47 @@
+<div class="span12">
+    <div class="well blue">
+        <div class="well-header">
+            <h5>{$judul|default:''}</h5>
+        </div>
+
+        <div class="well-content no-search">
+            <div class="form_row">
+                <label class="field_name align_right">UserLogin</label>
+                <div class="field">
+                    <input class="span8 easyui-validatebox" type="text" name="nama_user" id="nama_user" value="{$data.nama_user|default:''}">
+                </div>
+            </div>
+            <div class="form_row">
+                <label class="field_name align_right">Password</label>
+                <div class="field">
+                    <input class="span8 easyui-validatebox" type="password" name="pwd" id="pwd" value="{$data.pwd|default:''}">
+                    <span class="help-inline"></span>
+                </div>
+            </div>
+            
+            <div class="form_row">
+                <label class="field_name align_right">User Group</label>
+                <div class="field">
+                    <div class="span4 no-search">
+                        <select class="chosen easyui-validatebox" id="cl_user_group_id" name="cl_user_group_id">
+                            <option value="1" {if $editstatus eq 'edit'}{if $data.cl_user_group_id eq 1}selected{/if}{/if}>Administrator</option>
+                            <option value="2" {if $editstatus eq 'edit'}{if $data.cl_user_group_id eq 2}selected{/if}{/if}>Instruktur</option>
+                            <option value="3" {if $editstatus eq 'edit'}{if $data.cl_user_group_id eq 3}selected{/if}{/if}>Peserta</option>
+                            <option value="4" {if $editstatus eq 'edit'}{if $data.cl_user_group_id eq 4}selected{/if}{/if}>Administrasi</option>
+							
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="form_row">
+                <label class="field_name align_right">Status</label>
+                <div class="field">
+                    <label class="checkbox">
+                        <input type="checkbox" class="uniform" name="status" {if $editstatus eq 'edit'}{if $data.status eq 1}checked{/if}{else}checked{/if}> Aktif
+                    </label>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

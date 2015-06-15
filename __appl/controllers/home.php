@@ -30,11 +30,30 @@ class home extends KSO_Controller {
 		//echo $this->modeling['id'];exit;
 		
 		if($this->auth){
+			$status=$this->input->post('editstatus');
+			if($status){$this->smarty->assign('editstatus',$status);}
 			switch($mod){
 				case "awal":
 					$menu=$this->get_menu();
 					$this->smarty->assign('menu',$menu);
 					return $this->smarty->display('index.html');
+				break;
+				case "referensi":
+					
+					if($this->input->post('cl_user_group_id')){$this->smarty->assign('group_id',$this->input->post('cl_user_group_id'));}
+					switch($p2){
+						case "form_305":
+							$modul_main=$this->input->post('mod');
+							$jabatan=$this->db->get('cl_jabatan')->result_array();
+							$this->smarty->assign('jabatan',$jabatan);
+							if($status=='edit'){
+								$data=$this->mhome->getdata('cl_karyawan',$this->input->post('id'));
+								$this->smarty->assign('data',$data);	
+							}
+							$this->smarty->assign('modul_main',$modul_main);
+							$this->smarty->assign('status',$status);
+						break;
+					}
 				break;
 			}
 			$this->smarty->assign('mod',$mod);

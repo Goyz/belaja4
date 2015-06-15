@@ -1,0 +1,47 @@
+
+<div id="grid_na_{$main}">
+	<div id="tb_{$main}">
+		<div style="margin-top:2px;margin-left:10px; width:100%; font-family:Arial, Helvetica, sans-serif;">
+			<a href="javascript:void(0)" class="l-btn l-btn-plain " group="" id="add_{$main}" onClick="genform('add','{$mod}','{$main}')" >
+				<span class="l-btn-left l-btn-icon-left">
+					<span class="l-btn-text">Tambah</span><span class="l-btn-icon icon-add"></span>
+				</span>
+			</a>&nbsp;
+			<a href="javascript:void(0)" class="l-btn l-btn-plain " group="" id="edit_{$main}" onClick="genform('edit','{$mod}','{$main}')" >
+				<span class="l-btn-left l-btn-icon-left">
+					<span class="l-btn-text">Edit</span><span class="l-btn-icon icon-edit"></span>
+				</span>
+			</a>&nbsp;
+			<a href="javascript:void(0)" class="l-btn l-btn-plain " group="" id="delete_{$main}" onClick="genform('delete','{$mod}','{$main}','','cl_karyawan')" >
+				<span class="l-btn-left l-btn-icon-left">
+					<span class="l-btn-text">Hapus</span><span class="l-btn-icon icon-remove"></span>
+				</span>
+			</a>&nbsp;
+			<div style="float:right;margin-right:10px;height:20px;">
+				<input type="text" name="key_{$main}" id="key_{$main}" style="width:80%; border: 1px solid #99bbe8; height:23px;font-size:12px;padding:0px;" placeholder="Cari Karyawan Berdasarkan NIK atau Nama">
+				<a href="javascript:void(0)" class="l-btn l-btn-plain " group="" id="cari_{$main}">
+					<span class="l-btn-left l-btn-icon-left">
+						<span class="l-btn-text"></span><span class="l-btn-icon icon-search"></span>
+					</span>
+				</a>&nbsp;
+			</div>
+		</div>
+		
+	</div>
+	<div id="grid_{$main}"></div>
+</div>
+<div id="detil_na_{$main}" class="row-fluid" style="display:none;"></div>
+<script>
+$('#grid_na_{$main}').css('height',(getClientHeight()-190));
+genGrid('{$main}', 'grid_{$main}');
+
+$('#cari_{$main}').bind('click',function(r){
+	//if($('#key_{$main}').val()!=''){
+		$('#grid_{$main}').datagrid('reload',{ key:$('#key_{$main}').val() });
+	//}
+	//else{
+	//	$.messager.alert('E-Learning','Isi Key Pencarian!!', 'error');
+	//}
+});
+
+</script>
